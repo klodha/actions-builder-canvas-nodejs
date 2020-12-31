@@ -16,6 +16,7 @@
 
 const {
   conversation,
+  Suggestion,
   Canvas,
 } = require('@assistant/conversation');
 const functions = require('firebase-functions');
@@ -57,6 +58,9 @@ app.handle('welcome', (conv) => {
     // Update this placeholder string with the URL for your canvas web app.
     url: CANVAS_URL,
   }));
+  conv.add(new Suggestion({title: 'Red'}));
+  conv.add(new Suggestion({title: 'Blue'}));
+  conv.add(new Suggestion({title: 'Green'}));
 });
 
 app.handle('fallback', (conv) => {
@@ -79,6 +83,9 @@ app.handle('change_color', (conv) => {
         tint: tints[color],
       },
     }));
+  conv.add(new Suggestion({title: 'Purple'}));
+  conv.add(new Suggestion({title: 'Orange'}));
+  conv.add(new Suggestion({title: 'Yellow'}));
 });
 
 app.handle('start_spin', (conv) => {
@@ -89,6 +96,7 @@ app.handle('start_spin', (conv) => {
       spin: true,
     },
   }));
+  conv.add(new Suggestion({title: 'Stop'}));
 });
 
 app.handle('stop_spin', (conv) => {
@@ -99,6 +107,7 @@ app.handle('stop_spin', (conv) => {
       spin: false,
     },
   }));
+  conv.add(new Suggestion({title: 'Start'}));
 });
 
 app.handle('instructions', (conv) => {
